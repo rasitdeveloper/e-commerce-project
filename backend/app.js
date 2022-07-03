@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const productRoute = require('./routes/productRoute');
 
 const app = express();
 
@@ -12,6 +13,9 @@ mongoose.connect('mongodb://localhost/readytrade-db', {
 //Middlewares
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+
+//Routes
+app.use('/product', productRoute);
 
 const port = 4000;
 app.listen(port, () => {
