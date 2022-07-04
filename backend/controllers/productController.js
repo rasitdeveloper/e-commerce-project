@@ -22,3 +22,9 @@ exports.deleteProduct = async (req,res) => {
     const deletedData = await Product.findByIdAndDelete(product_id);
     res.json(deletedData)
 }
+
+exports.getSingleProduct = async (req,res) => {
+    const { product_id } = req.params;
+    const productData = await Product.findById(product_id);
+    res.json(productData)
+}
