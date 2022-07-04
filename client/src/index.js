@@ -7,7 +7,14 @@ import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false // false fefetch on re-focus
+    }
+  }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

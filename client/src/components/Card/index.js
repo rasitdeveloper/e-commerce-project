@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Card( {item}) {
     return <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="6">
         <Link to="#/">
-            <Image src="https://picsum.photos/500/300" />
+            <Image src={item.photos[0]} loading="lazy"/>
             <Box p="6">
                 <Box mt="2" fontWeight="semibold" as="h3" lineheight="tight">
                     {item.title}
