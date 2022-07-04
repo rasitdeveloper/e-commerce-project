@@ -31,7 +31,7 @@ function ProductDetail() {
       <Text as="h3" fontSize="3xl">
         {data.title}
       </Text>
-      <p>{data.desciption}</p>
+      <p>{data.description}</p>
       <Box mt="50" ml="400" w={1000} h={600}>
         <ImageGallery items={images}/>
       </Box>

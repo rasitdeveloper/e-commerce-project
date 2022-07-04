@@ -28,3 +28,15 @@ exports.getSingleProduct = async (req,res) => {
     const productData = await Product.findById(product_id);
     res.json(productData)
 }
+
+const limit = 12;
+exports.getTwelveProducts = async (req,res) => {
+    let { page } = req.query;
+    if (page < 1) {page = 1;}
+    const skip = (parseInt(page) - 1) * limit;
+    const products = await Product.find({})
+        .sort({"createdAt": -1}) // last added first
+        .skip(skip)
+        .limit(limit);
+    res.json(products)
+}
