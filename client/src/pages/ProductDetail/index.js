@@ -32,7 +32,7 @@ function ProductDetail() {
         {data.title}
       </Text>
       <p>{data.description}</p>
-      <Box mt="50" ml="400" w={1000} h={600}>
+      <Box mt="50" ml="300" w={1000} h={600}>
         <ImageGallery items={images}/>
       </Box>
     </div>
