@@ -1,7 +1,8 @@
 import React from 'react'
-import { Flex, Box, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react"
+import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Alert } from "@chakra-ui/react"
+import validationSchema from './validations'
 const { useFormik } = require("formik");
-const validationSchema = require("./valitadions");
+const { toRegister } = require("../../../api")
 
 function Register() {
 
@@ -13,7 +14,12 @@ function Register() {
     },
     validationSchema,
     onSubmit: async (values, bag) => {
-      console.log(values)
+      try{
+        const registerResponse = await toRegister({email:values.email,password:values.password});
+        console.log(registerResponse)
+      } catch (e) {
+        bag.setErrors({ general: e.response.data.message });
+      }
     },
   })
 
@@ -25,6 +31,11 @@ function Register() {
           <Box>
             <Heading>Register</Heading>
           </Box>
+          <Box my={6}>
+						{formik.errors.general && (
+							<Alert status="error">{formik.errors.general}</Alert>
+						)}
+					</Box>
           <Box my={6} textAlign="left">
             <form onSubmit={formik.handleSubmit}>
               <FormControl>
@@ -34,6 +45,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
+                isInvalid={formik.touched.email && formik.errors.email}
                 />
               </FormControl>
               <FormControl mt={6}>
@@ -44,6 +56,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
+                isInvalid={formik.touched.password && formik.errors.password}
                 />
               </FormControl>
               <FormControl mt={6}>
@@ -54,6 +67,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.passwordConfirm}
+                isInvalid={formik.touched.passwordConfirm && formik.errors.passwordConfirm}
                 />
               </FormControl>
               <Button mt={12} width="full" type='submit'>

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const productRoute = require('./routes/productRoute');
+const authRoute = require('./routes/authRoute');
 const cors = require('cors');
 
 
@@ -19,6 +20,7 @@ app.use(express.json())
 
 //Routes
 app.use('/product', productRoute);
+app.use('/auth', authRoute);
 
 const port = 4000;
 app.listen(port, () => {
