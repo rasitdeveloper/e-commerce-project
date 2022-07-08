@@ -3,8 +3,11 @@ import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Alert } from
 import validationSchema from './validations'
 const { useFormik } = require("formik");
 const { toRegister } = require("../../../api")
+const { useAuth } = require("../../../contexts/AuthContext")
 
 function Register() {
+
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -16,6 +19,7 @@ function Register() {
     onSubmit: async (values, bag) => {
       try{
         const registerResponse = await toRegister({email:values.email,password:values.password});
+        login(registerResponse)
         console.log(registerResponse)
       } catch (e) {
         bag.setErrors({ general: e.response.data.message });
