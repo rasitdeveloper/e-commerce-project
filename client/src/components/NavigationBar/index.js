@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext"
 
 function NavigationBar() {
 
-  const { isLoggedIn } = useAuth();
+  const { loggedIn } = useAuth();
 
   return (
     <nav className={styles.nav}>
@@ -23,7 +23,7 @@ function NavigationBar() {
         </div>
         <div className={styles.right}>
           {
-            !isLoggedIn && (
+            !loggedIn && (
               <>
                 <Link to="/register">
                   <Button colorScheme="cyan">Register</Button>
@@ -36,7 +36,7 @@ function NavigationBar() {
           }
 
           {
-            isLoggedIn && (
+            loggedIn && (
               <>
                 <Link to="/profile">
                   <Button colorScheme="blue">Profile</Button>
