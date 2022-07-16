@@ -46,6 +46,10 @@ export const fetchMe = async () => {
 
 export const toLogout = async () => {
 	const { data } = await axios.post('http://localhost:4000/auth/logout',{refresh_token: localStorage.getItem("refresh-token"),});
+	return data;
+};
 
+export const toLogin = async (input) => {
+	const { data } = await axios.post('http://localhost:4000/auth/login',input);
 	return data;
 };
