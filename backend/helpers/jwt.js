@@ -1,5 +1,5 @@
 const JWT = require("jsonwebtoken");
-const Boom = require("boom");
+const Boom =  require("@hapi/boom");
 
 const redis = require("../clients/redis");
 
