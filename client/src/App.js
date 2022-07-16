@@ -5,6 +5,7 @@ import Register from "./pages/Auth/Register";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./pages/ProtectedRoute";
 import './App.css';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/product/:product_id" element={<ProductDetail />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route element={<ProtectedRoute/>}><Route path='/profile' element={<Profile/>} /></Route>
           </Routes>
         </div>
       </div>

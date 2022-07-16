@@ -1,12 +1,14 @@
 import React from 'react'
 import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Alert } from "@chakra-ui/react"
 import validationSchema from './validations'
+import { useNavigate } from "react-router-dom"
+
 const { useFormik } = require("formik");
 const { toRegister } = require("../../../api")
 const { useAuth } = require("../../../contexts/AuthContext")
 
 function Register() {
-
+  let navigate = useNavigate();
   const { login } = useAuth()
 
   const formik = useFormik({
@@ -21,6 +23,7 @@ function Register() {
         const registerResponse = await toRegister({email:values.email,password:values.password});
         console.log(registerResponse)
         login(registerResponse)
+        navigate('/profile')
       } catch (e) {
         bag.setErrors({ general: e.response.data.message });
       }

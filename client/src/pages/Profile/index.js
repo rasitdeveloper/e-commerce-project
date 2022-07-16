@@ -1,12 +1,14 @@
 import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Text, Button } from "@chakra-ui/react"
+import { useNavigate } from "react-router-dom"
 
-function Profile({history}) {
+function Profile() {
+    let navigate = useNavigate();
     const { user, logout } = useAuth();
     const handleLogout = async () => {
 		logout(() => {
-			history.push("/");
+			navigate('/')
 		});
 	};
 
