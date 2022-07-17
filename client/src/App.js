@@ -7,6 +7,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Cart from "./pages/Cart";
+import Error404 from "./pages/Error404";
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/product/:product_id" element={<ProductDetail />} />
             <Route element={<ProtectedRoute/>}><Route path='/profile' element={<Profile/>} /></Route>
             <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </div>
       </div>
