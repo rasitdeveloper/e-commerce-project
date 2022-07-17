@@ -4,10 +4,12 @@ import { Link } from "react-router-dom"
 import { Button } from "@chakra-ui/react"
 
 import { useAuth } from "../../contexts/AuthContext"
+import { useCart } from "../../contexts/CartContext"
 
 function NavigationBar() {
 
   const { loggedIn } = useAuth();
+  const { items } = useCart();
 
   return (
     <nav className={styles.nav}>
@@ -38,6 +40,15 @@ function NavigationBar() {
           {
             loggedIn && (
               <>
+                {
+                  items.length > 0 && (
+                    <Link to="/cart">
+                      <Button colorScheme="pink" variant="outline">
+                        Cart ({items.length})
+                      </Button>
+                    </Link>
+                  )
+                }
                 <Link to="/profile">
                   <Button colorScheme="blue">Profile</Button>
                 </Link>

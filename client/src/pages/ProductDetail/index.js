@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom"
 import { getSingleProduct } from "../../api"
 import { Box, Text, Button} from "@chakra-ui/react"
 import ImageGallery from 'react-image-gallery'
+import { useCart } from "../../contexts/CartContext"
 
 function ProductDetail() {
+
+  const { addToCart, items } = useCart();
 
   const { product_id } = useParams();
 
@@ -21,13 +24,14 @@ function ProductDetail() {
     return <div>Error!</div>
   }
 
-  console.log(data)
-
+  const findCartItem = items.find((item) => item._id === product_id)
   const images = data.photos.map((url) => ({ original: url}))
 
   return (
     <div>
-      <Button colorScheme="orange">Add to Cart</Button>
+      <Button colorScheme={findCartItem ? "red" : "green"} onClick={() => addToCart(data,findCartItem)}>
+        {findCartItem ? "Remove from Cart" : "Add to Cart"}
+      </Button>
       <Text as="h3" fontSize="3xl">
         {data.title}
       </Text>

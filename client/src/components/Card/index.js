@@ -1,7 +1,11 @@
 import { Box, Image, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../contexts/CartContext"
 
 function Card( {item}) {
+    const { addToCart, items } = useCart();
+    const findCartItem = items.find((cart_item) => cart_item._id === item._id)
+
     return <Box borderWidth="2px" borderRadius="lg" overflow="hidden" p="6">
         <Link to={`/product/${item._id}`}>
             <Image src={item.photos[0]} loading="lazy"/>
@@ -12,7 +16,9 @@ function Card( {item}) {
                 <Box>${item.price}</Box>
             </Box>
         </Link>
-        <Button colorScheme="orange" mr="6">Add to Cart</Button>
+        <Button colorScheme={findCartItem ? "red" : "green"} variant="solid" mr="6" onClick={() => addToCart(item,findCartItem)}>
+            {findCartItem ? "Remove from Cart" : "Add to Cart"}
+        </Button>
         <Button colorScheme="purple">Buy Now</Button>
     </Box>
 }
