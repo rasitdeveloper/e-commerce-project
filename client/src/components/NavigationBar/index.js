@@ -8,7 +8,7 @@ import { useCart } from "../../contexts/CartContext"
 
 function NavigationBar() {
 
-  const { loggedIn } = useAuth();
+  const { loggedIn, user } = useAuth();
   const { items } = useCart();
 
   return (
@@ -46,6 +46,13 @@ function NavigationBar() {
                       <Button colorScheme="pink" variant="outline">
                         Cart ({items.length})
                       </Button>
+                    </Link>
+                  )
+                }
+                {
+                  user?.role === 'admin' && (
+                    <Link to="/admin">
+                      <Button colorScheme="red" variant="ghost">Admin</Button>
                     </Link>
                   )
                 }

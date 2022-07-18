@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Cart from "./pages/Cart";
 import Error404 from "./pages/Error404";
+import Admin from "./pages/Admin";
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/product/:product_id" element={<ProductDetail />} />
             <Route element={<ProtectedRoute/>}><Route path='/profile' element={<Profile/>} /></Route>
+            <Route element={<ProtectedRoute admin="true"/>}><Route path='/admin' element={<Admin/>} /></Route>
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
