@@ -1,5 +1,5 @@
 const Boom =  require("@hapi/boom");
-const User = require("../models/user");
+const User = require("../models/User");
 
 // helpers
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require("../helpers/jwt");

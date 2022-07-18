@@ -1,12 +1,30 @@
-import React from 'react'
-import { Alert, Button, Image, Box, Text } from "@chakra-ui/react";
+import { React, useRef, useState } from 'react'
+import { Alert, Button, Image, Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, FormControl, FormLabel, Textarea } from "@chakra-ui/react";
 import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom"
+import { postOrder } from '../../api';
+import { useAuth } from "../../contexts/AuthContext";
 
 function Cart() {
 
-  const { items, removeFromCart } = useCart();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const initialRef = useRef(null)
+  const [ address, setAddress] = useState('')
+  const { items, removeFromCart, makeEmptyCart } = useCart();
   const total = items.reduce((acc, obj) => acc + obj.price, 0);
+  const { user } = useAuth();
+
+  const handleSubmitForm = async () => {
+    const itemsId = items.map((item) => item._id)
+    const input = {
+      user: user._id,
+      address,
+      items: JSON.stringify(itemsId)
+    }
+    await postOrder(input);
+    makeEmptyCart()
+    onClose() // close modal
+  }
 
   return (
     <Box p={6}>
@@ -31,6 +49,33 @@ function Cart() {
           <Box mt="12">
             <Text fontSize="22">Total: {total}</Text>
           </Box>
+
+          <Button mt={3} size="sm" colorScheme="green" onClick={onOpen}>Order</Button>
+
+          <Modal
+            initialFocusRef={initialRef}
+            isOpen={isOpen}
+            onClose={onClose}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Order</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <FormControl>
+                  <FormLabel>Address</FormLabel>
+                  <Textarea ref={initialRef} placeholder='Adress Area' value={address} onChange={(e) => setAddress(e.target.value)} />
+                </FormControl>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button colorScheme='blue' mr={3} onClick={handleSubmitForm}>
+                  Save
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </>
       }
 

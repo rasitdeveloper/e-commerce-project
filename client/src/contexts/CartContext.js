@@ -24,11 +24,14 @@ const CartProvider = ({children}) => {
         setItems(filtered)
     }
 
+    const makeEmptyCart = () => setItems([]);
+
     const values = {
         items,
         setItems,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        makeEmptyCart
     }
 
     return <CartContext.Provider value={values}>{children}</CartContext.Provider>
