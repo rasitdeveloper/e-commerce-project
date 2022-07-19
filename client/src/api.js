@@ -58,3 +58,8 @@ export const postOrder = async (input) => {
 	const { data } = await axios.post('http://localhost:4000/order',input);
 	return data;
 };
+
+export const getOrders = async () => {
+	const { data } = await axios.get('http://localhost:4000/order');
+	return data;
+};
