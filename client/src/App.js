@@ -23,7 +23,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/product/:product_id" element={<ProductDetail />} />
             <Route element={<ProtectedRoute/>}><Route path='/profile' element={<Profile/>} /></Route>
-            <Route element={<ProtectedRoute admin="true"/>}><Route path='/admin' element={<Admin/>} /></Route>
+            <Route element={<ProtectedRoute admin="true"/>}><Route path='/admin/*' element={<Admin/>} /></Route>
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
