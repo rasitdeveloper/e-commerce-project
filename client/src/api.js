@@ -19,6 +19,7 @@ axios.interceptors.request.use(
 	}
 );
 
+// Start-Product
 export const getAllProduct = async() => {
     const { data } = await axios.get('http://localhost:4000/product/get-all-product')
     return data;
@@ -34,6 +35,13 @@ export const getSingleProduct = async(id) => {
     return data;
 }
 
+export const deleteProduct = async (product_id) => {
+	const { data } = await axios.delete(`http://localhost:4000/product/delete-product/${product_id}`);
+	return data;
+};
+// End-Product
+
+// Start-Auth
 export const toRegister = async(input) => {
     const { data } = await axios.post('http://localhost:4000/auth/register', input)
     return data;
@@ -53,7 +61,10 @@ export const toLogin = async (input) => {
 	const { data } = await axios.post('http://localhost:4000/auth/login',input);
 	return data;
 };
+// End Auth
 
+
+// Start Order
 export const postOrder = async (input) => {
 	const { data } = await axios.post('http://localhost:4000/order',input);
 	return data;
@@ -63,3 +74,4 @@ export const getOrders = async () => {
 	const { data } = await axios.get('http://localhost:4000/order');
 	return data;
 };
+// End Order
