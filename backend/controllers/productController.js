@@ -1,9 +1,21 @@
 const Product = require('../models/Product')
 
 
-exports.addProduct = async (req, res) => {
-    const addedData = await Product.create(req.body)
-    res.json(addedData)
+exports.addProduct = async (req, res, next) => {
+    // const addedData = await Product.create(req.body)
+    // res.json(addedData)
+    const input = req.body;
+    try {
+        input.photos = JSON.parse(input.photos);
+
+        const product = new Product(input);
+		const addedData = await product.save();
+
+        res.json(addedData);
+    } catch (e) {
+        console.log(e);
+        next(e);
+    }
 }
 
 exports.getAllProduct = async (req, res) => {

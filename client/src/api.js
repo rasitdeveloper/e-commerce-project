@@ -44,6 +44,10 @@ export const updateProduct = async (input, product_id) => {
 	const { data } = await axios.put(`http://localhost:4000/product/update-product/${product_id}`,input);
 	return data;
 };
+export const addProduct = async (input) => {
+	const { data } = await axios.post('http://localhost:4000/product/add-product',input);
+	return data;
+};
 // End-Product
 
 // Start-Auth

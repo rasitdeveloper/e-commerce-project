@@ -24,9 +24,6 @@ function Admin() {
                 <li>
                     <Link to="/admin/products">Products</Link>
                 </li>
-                <li>
-                    <Link to="/admin/products/new">New Product</Link>
-                </li>
             </ul>
         </nav>
 
